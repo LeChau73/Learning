@@ -21,32 +21,24 @@ public:
         int number1 = 0, number2 = 0, sum = 0, square_index = 0;
         auto itr1 = l1, itr2 = l2;
         ListNode* l3;
-
-        while (itr1 != NULL || itr2 != NULL) {
-
-            if (itr1 == NULL && itr2 != NULL) {
-                // l1 < l2 
-                number1 = number1 * 10;
-                number2 += itr2->val * pow(10, square_index);
-                itr2 = itr2->next;
-            }
-            else if (itr1 != NULL && itr2 == NULL) {
-                // l1 > l2
-                number2 = number2 * 10;
-                number1 += itr1->val * pow(10, square_index);
-                itr1 = itr1->next;
-            }
-            else {
-                // l1 && l2 chưa hết
-                number1 += itr1->val * pow(10, square_index);
-                number2 += itr2->val * pow(10, square_index);
-                itr1 = itr1->next;
-                itr2 = itr2->next;
-            }
-            square_index++;
+        // Lấy giá trị trong list 1
+        while (itr1 != NULL) {
+            number1 += itr1->val * pow(10, square_index);
+            ++square_index;
+            itr1 = itr1->next;
+        }
+        square_index = 0;
+        // Lấy giá trị trong list 2
+        while (itr2 != NULL) {
+            number2 += itr2->val * pow(10, square_index);
+            ++square_index;
+            itr2 = itr2->next;
         }
 
+        // Cộng 2 số 
         sum = number1 + number2;
+
+        /* Tách số và thêm vào list để trả về */
         int phan_nguyen = 0, phan_du = 0;
         l3 = new ListNode();
         // Tach so
