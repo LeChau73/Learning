@@ -1,0 +1,61 @@
+# Thư mục build và các tệp tạm thời
+bin/
+obj/
+Debug/
+Release/
+DebugPublic/
+ReleasePublic/
+x64/
+x86/
+arm/
+arm64/
+
+# Các tệp cấu hình IDE cá nhân
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.ncb
+*.sdf
+*.ipch
+*.pch
+*.pdb
+*.tmp
+*.log
+
+# Các thư mục và tệp liên quan đến NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+
+# Các tệp và thư mục cấu hình khác
+.vscode/
+.idea/
+
+# Các tệp và thư mục liên quan đến CMake
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+CTestTestfile.cmake
+
+# Các tệp và thư mục liên quan đến Visual Studio Code
+.vscode/
+
+# Tệp cấu hình của môi trường hệ thống
+*.DS_Store
+*.env
+
+# Các tệp tạm khác
+*.tmp
+*.swp
+*.swo
+*.pidb
+*.suo
+*.orig
+
+# Các thư mục khác có thể cần bỏ qua
+*.vs/
