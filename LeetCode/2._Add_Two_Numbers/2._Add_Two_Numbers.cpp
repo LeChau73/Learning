@@ -18,12 +18,13 @@ struct ListNode {
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int number1 = 0, number2 = 0, sum = 0, square_index = 0;
+        int number1 = 0, number2 = 0, sum = 0;
+        int square_index = 0;
         auto itr1 = l1, itr2 = l2;
         ListNode* l3;
         // Lấy giá trị trong list 1
         while (itr1 != NULL) {
-            number1 += itr1->val * pow(10, square_index);
+            number1 = number1 * 10 + itr1->val;
             ++square_index;
             itr1 = itr1->next;
         }
@@ -39,43 +40,56 @@ public:
         sum = number1 + number2;
 
         /* Tách số và thêm vào list để trả về */
-        int phan_nguyen = 0, phan_du = 0;
-        l3 = new ListNode();
+
+        unsigned char phan_du = 0;
+        long double phan_nguyen = 0;
+        
+
         // Tach so
-        for (int i = 0; i < square_index; i++) {
-            if (i == 0)
+        // ĐK: mỗi node là 1 new phần tử mới 
+        // node_new = new ListNode(value);
+        ListNode* temp_last = new ListNode();
+        ListNode* Head_Node = new ListNode();
+        Head_Node = NULL;  // Chưa trỏ tới phần tử nào trong Node
+        
+        while (true)
+        {
+            // Tach so phan du -> 
+            phan_du = fmod(sum, 10);
+            phan_nguyen = sum / 10;
+            sum = phan_nguyen;
+
+            //
+            ListNode* newNode = new ListNode(phan_du);
+            if (Head_Node == NULL)
             {
-                //Thằng cuối cùng thì sẽ gán next của nó bằng = NULL
-                //l3[final position].next = NULL
-                l3[square_index - 1].next = NULL;
+                Head_Node = newNode; //Head_Node trỏ đến phần tử đầu tiên
+                temp_last = Head_Node; // Sử dụng một biến tạm để lấy head node (dùng để duyệt phần tử)
             }
             else {
-                // Case should not be in the last position 
-                // l3[pointer of previous element].next = l3[current element]
-                l3[square_index - 1 - i].next = &l3[square_index - i];
+                while (temp_last->next != NULL) {
+                    temp_last = temp_last->next;
+                }
+                temp_last->next = newNode;
             }
-            phan_nguyen = sum / pow(10, square_index - (i + 1));
-            phan_du = sum % int(pow(10, square_index - (i + 1)));
-            sum = phan_du;
-            l3[square_index - (i + 1)].val = phan_nguyen;
+            if (sum == 0)
+                return Head_Node;
         }
-
-        return l3;
-
     }
 };
 
 int main() {
 
-    int a[5] = { 2, 3, 4 , 2 , 5 };
-    int b[3] = { 5, 6, 4 };
-    ListNode* l1 = new ListNode[5];
-    ListNode* l2 = new ListNode[3];
+    int a[] = { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 };
+    int b[] = { 5,6,4 };
+    int size_a = sizeof(a) / sizeof(a[0]);
+    int size_b = sizeof(b) / sizeof(b[0]);
+    ListNode* l1 = new ListNode[size_a];
+    ListNode* l2 = new ListNode[size_b];
     ListNode* l3;
 
 
-    int size_a = sizeof(a) / sizeof(a[0]);
-    int size_b = sizeof(b) / sizeof(b[0]);
+    
 
     for (int i = 0; i < size_a; i++) {
         if (i == (size_a - 1))
@@ -106,8 +120,17 @@ int main() {
     }
     cout << endl;
 
-    for (ListNode* itr = l3; itr != NULL; itr = itr->next) {
-        delete itr;
+
+    ListNode* itr = new ListNode();
+    itr = l3;
+    while (itr != NULL)
+    {
+        // Phan tu tiep theo
+        itr = itr->next;
+        // Xoa phan tu cu
+        delete l3;
+        // Luu lai phan tu cu
+        l3 = itr;
     }
 
     delete[] l2;
