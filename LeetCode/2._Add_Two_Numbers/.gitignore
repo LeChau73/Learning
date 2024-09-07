@@ -58,4 +58,4 @@ CTestTestfile.cmake
 *.orig
 
 # Các thư mục khác có thể cần bỏ qua
-*.vs/
+*.vs/*

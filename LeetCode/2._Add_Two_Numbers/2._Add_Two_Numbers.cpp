@@ -5,6 +5,9 @@
 #include<cmath>
 using namespace std;
 
+/* CÁCH MỚI: LẤY ĐƯỢC SỐ THÌ XỬ LÝ LUÔN */
+/* STATUS: CHƯA LÀM */
+
 
 // Definition for singly-linked list.
 struct ListNode {
