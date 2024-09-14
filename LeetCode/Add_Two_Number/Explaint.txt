@@ -1,0 +1,6 @@
+GIải thích cách làm của tôi:
++ Vòng lặp while Kiểm tra l1,l2 chưa đến cuối list và flag là cờ khi cộng 2 số lớn hơn 19 thì dư 1 phải khác 0,Bởi vì nếu còn = 1 thì nếu như trường hợp hết 2 list mà cờ vẫn bằng 1 tức là vẫn dư 1 thì add 1 vào cuối list
++ Ở trong while thì xử lý như sau: Kiểm tra nếu 1 trong 2 list nếu cuối dãy thì k duyệt nữa và gán node mới bằng 0,tức là k có 
++ Cộng 2 phần tử lấy đc ở mỗi node ,nếu dư 1 thì cộng vào thêm 
++ Nếu sum > 10 thì trừ 10 để add vào list và flag = 1, còn k thì add vào thôi 
++ Sau đó thêm vào list mới và trả về list mới
