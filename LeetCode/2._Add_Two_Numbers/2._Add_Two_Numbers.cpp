@@ -21,69 +21,71 @@ struct ListNode {
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
-        int number1 = 0, number2 = 0, sum = 0;
-        int square_index = 0;
-        auto itr1 = l1, itr2 = l2;
-        ListNode* l3;
-        // Lấy giá trị trong list 1
-        while (itr1 != NULL) {
-            number1 = number1 * 10 + itr1->val;
-            ++square_index;
-            itr1 = itr1->next;
-        }
-        square_index = 0;
-        // Lấy giá trị trong list 2
-        while (itr2 != NULL) {
-            number2 += itr2->val * pow(10, square_index);
-            ++square_index;
-            itr2 = itr2->next;
-        }
-
-        // Cộng 2 số 
-        sum = number1 + number2;
-
-        /* Tách số và thêm vào list để trả về */
-
-        unsigned char phan_du = 0;
-        long double phan_nguyen = 0;
-        
-
-        // Tach so
-        // ĐK: mỗi node là 1 new phần tử mới 
-        // node_new = new ListNode(value);
-        ListNode* temp_last = new ListNode();
-        ListNode* Head_Node = new ListNode();
-        Head_Node = NULL;  // Chưa trỏ tới phần tử nào trong Node
-        
-        while (true)
+        /* Solution for new ideal */
+        /* Each elements when extract from list will be have caculated and add into new list */
+        /*  */
+        int num_l1 = 0, num_l2 = 0, sum = 0, new_num = 0;
+        bool flag = 0;
+        ListNode* head = new ListNode();
+        ListNode* itr = new ListNode();
+        head = NULL;
+        // l1 == NULL && l2 == NULL && flag == 0
+        // Thì thoát khỏi while
+        // 1 && 0 && 0
+        while ( (l1 != NULL) || (l2 != NULL) || (flag != 0) )
         {
-            // Tach so phan du -> 
-            phan_du = fmod(sum, 10);
-            phan_nguyen = sum / 10;
-            sum = phan_nguyen;
-
-            //
-            ListNode* newNode = new ListNode(phan_du);
-            if (Head_Node == NULL)
+            // tang phan tu trong lisst
+            if (l1 != NULL)
             {
-                Head_Node = newNode; //Head_Node trỏ đến phần tử đầu tiên
-                temp_last = Head_Node; // Sử dụng một biến tạm để lấy head node (dùng để duyệt phần tử)
+                num_l1 = l1->val;
+                l1 = l1->next;
+            }        
+            else {
+                num_l1 = 0;
+            }
+               
+            if (l2 != NULL)
+            {
+                num_l2 = l2->val;
+                l2 = l2->next;
+            }
+            else
+                num_l2 = 0;
+       
+            sum = num_l1 + num_l2 + flag;
+            if (sum >= 10)
+            {
+                // sum > 10
+                flag = 1;
+                new_num = sum - 10;
+            }
+            else
+            {
+                // sum < 10
+                new_num = sum;
+                flag = 0;
+            }
+            // add vào list
+            ListNode* new_node = new ListNode(new_num);
+            if (head == NULL) {
+                head = new_node;
+                itr = head;
             }
             else {
-                while (temp_last->next != NULL) {
-                    temp_last = temp_last->next;
+                while (itr->next != NULL) {
+                    itr = itr->next;
                 }
-                temp_last->next = newNode;
+                itr->next = new_node;
             }
-            if (sum == 0)
-                return Head_Node;
+            
         }
+        return head;
     }
 };
 
 int main() {
 
-    int a[] = { 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1 };
+    int a[] = { 1,0,0,0,0,0,0,0,0,1 };
     int b[] = { 5,6,4 };
     int size_a = sizeof(a) / sizeof(a[0]);
     int size_b = sizeof(b) / sizeof(b[0]);
